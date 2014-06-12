@@ -29,7 +29,7 @@ Authors
 
 °²×°Ç°°Î³öÍøÏß£¡
 
-°²×°Ñ¡Ôñ::
+°²×°Ñ¡Ôñ£º
 Language  --> English
 --> Install Ubuntu Server
 Select a language --> English
@@ -40,7 +40,7 @@ Set up users and passwords --> ÊäÈëÓÃ»§(Èçctid)--> ÖØ¸´ÊäÈëÒ»´ÎÓÃ»§Ãû--> ÊäÈëÃÜÂ
 Configure the clock --> Select from worldwide list --> Shanghai 
 Partition disks --> Manual --> ¸ù¾İÒªÇó·ÖÅä¿Õ¼ä
 Configuring tasksel --> No automatic updates
-Software selection --> OpenSSH serverInstall the GRUB boot loader on a hard disk --> Yes
+Software selection --> OpenSSH server Install the GRUB boot loader on a hard disk --> Yes
 Finish the installation --> Continue
 ²åÉÏÍøÏß£¡
 
