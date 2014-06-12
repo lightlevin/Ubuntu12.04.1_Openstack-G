@@ -52,6 +52,7 @@ Authors
 3.1ÅäÖÃÍøÂç
 -----------------
 ::
+
    sudo -s
    vi /etc/network/interfaces
 
