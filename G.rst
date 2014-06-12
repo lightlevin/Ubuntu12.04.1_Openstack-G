@@ -28,7 +28,7 @@ Authors
 2.1安装 ubuntu 12.04.1 Server 64bit 系统
 ----------------------------------------
 
-** 安装前拔出网线！**
+**安装前拔出网线！** 
 
 * 安装选择 ::
 
@@ -44,7 +44,7 @@ Authors
    Software selection --> OpenSSH server Install the GRUB boot loader on a hard disk --> Yes
    Finish the installation --> Continue
 
-* 插上网线！
+**插上网线！**
 
 3.共有部分安装
 =============================
@@ -86,19 +86,23 @@ Authors
 3.3安装ntp服务
 ----------------------------
 
-apt-get install -y ntp
+::
 
-sed -i 's/server 0.ubuntu.pool.ntp.org/#server 0.ubuntu.pool.ntp.org/g' /etc/ntp.conf
-sed -i 's/server 1.ubuntu.pool.ntp.org/#server 1.ubuntu.pool.ntp.org/g' /etc/ntp.conf
-sed -i 's/server 2.ubuntu.pool.ntp.org/#server 2.ubuntu.pool.ntp.org/g' /etc/ntp.conf
-sed -i 's/server 3.ubuntu.pool.ntp.org/#server 3.ubuntu.pool.ntp.org/g' /etc/ntp.conf
+   apt-get install -y ntp
 
-源服务器：
+禁用原有ntp池 ::
+
+   sed -i 's/server 0.ubuntu.pool.ntp.org/#server 0.ubuntu.pool.ntp.org/g' /etc/ntp.conf
+   sed -i 's/server 1.ubuntu.pool.ntp.org/#server 1.ubuntu.pool.ntp.org/g' /etc/ntp.conf
+   sed -i 's/server 2.ubuntu.pool.ntp.org/#server 2.ubuntu.pool.ntp.org/g' /etc/ntp.conf
+   sed -i 's/server 3.ubuntu.pool.ntp.org/#server 3.ubuntu.pool.ntp.org/g' /etc/ntp.conf
+
+控制节点 ::
 
    sed -i 's/server ntp.ubuntu.com/server 132.xxx.xxx.18/g' /etc/ntp.conf
    service ntp restart  
 
-其他服务器：
+网络及计算节点 ::
 
    sed -i 's/server ntp.ubuntu.com/server 10.10.10.51/g' /etc/ntp.conf
    service ntp restart  
@@ -106,6 +110,7 @@ sed -i 's/server 3.ubuntu.pool.ntp.org/#server 3.ubuntu.pool.ntp.org/g' /etc/ntp
 3.4安装vlan 和 bridge服务
 ---------------------------------------
 
+::
    apt-get install -y vlan bridge-utils
 
 * 配置IP映射::
