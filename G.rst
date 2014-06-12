@@ -25,11 +25,11 @@ Authors
 2.系统安装
 ======================
 
-安装 ubuntu 12.04.1 Server 64bit 系统
+* 安装 ubuntu 12.04.1 Server 64bit 系统
 
-安装前拔出网线！
+* 安装前拔出网线！
 
-安装选择::
+* 安装选择::
 
    Language --> English --> Install Ubuntu Server
    Select a language --> English
@@ -42,25 +42,25 @@ Authors
    Configuring tasksel --> No automatic updates  
    Software selection --> OpenSSH server Install the GRUB boot loader on a hard disk --> Yes
    Finish the installation --> Continue
-   插上网线！
+* 插上网线！
 
 3.共有部分安装
 =============================
 
-3.1配置网络::
+3.1配置网络
 -----------------
+::
+   sudo -s
+   vi /etc/network/interfaces
 
-sudo -s
-vi /etc/network/interfaces
+   auto eth0
+   iface eth0 inet static
+   address 10.xxx.xxx.xxx
+   netmask 255.xxx.xxx.xxx
+   gateway 10.xxx.xxx.xxx
+   dns-nameservers 8.8.8.8
 
-auto eth0
-iface eth0 inet static
-address 10.xxx.xxx.xxx
-netmask 255.xxx.xxx.xxx
-gateway 10.xxx.xxx.xxx
-dns-nameservers 8.8.8.8
-
-/etc/init.d/networking restart
+   /etc/init.d/networking restart
 
 3.2更新apt-get源列表
 -----------------------
