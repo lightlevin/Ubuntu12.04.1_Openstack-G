@@ -25,10 +25,11 @@ Authors
 2.系统安装
 ======================
 
-*安装 ubuntu 12.04.1 Server 64bit 系统
+安装 ubuntu 12.04.1 Server 64bit 系统
 
-*安装前拔出网线！！
-*安装选择::
+安装前拔出网线!!
+
+安装选择::
 Language  --> English
 --> Install Ubuntu Server
 Select a language --> English
@@ -41,7 +42,7 @@ Partition disks --> Manual --> 根据要求分配空间
 Configuring tasksel --> No automatic updates
 Software selection --> OpenSSH serverInstall the GRUB boot loader on a hard disk --> Yes
 Finish the installation --> Continue
-*插上网线！
+插上网线!
 
 
 
