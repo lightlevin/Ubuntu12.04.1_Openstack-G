@@ -30,11 +30,15 @@ Authors
 安装前拔出网线！
 
 安装选择：
+
    Language --> English --> Install Ubuntu Server
    Select a language --> English
 Select your location --> United States
+
 Configure the keyboard --> No --> English(US) --> English(US)
+
 Configure the network --> Continue --> Do not configure the network at this time -->  输入设备名(os1…3)
+
 Set up users and passwords --> 输入用户(如ctid)--> 重复输入一次用户名--> 输入密码(如ctid1234)-->重复输入一次密码 --> No 
 Configure the clock --> Select from worldwide list --> Shanghai 
 Partition disks --> Manual --> 根据要求分配空间
