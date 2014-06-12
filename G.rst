@@ -30,9 +30,8 @@ Authors
 安装前拔出网线！
 
 安装选择：
-Language  --> English
---> Install Ubuntu Server
-Select a language --> English
+   Language --> English --> Install Ubuntu Server
+   Select a language --> English
 Select your location --> United States
 Configure the keyboard --> No --> English(US) --> English(US)
 Configure the network --> Continue --> Do not configure the network at this time -->  输入设备名(os1…3)
