@@ -609,7 +609,7 @@ Authors
    admin_user = quantum
    admin_password = service_pass
 
-* 更新 /etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini :: 
+更新/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini ::
 
    #Under the database section
    [DATABASE]
@@ -628,7 +628,7 @@ Authors
    [SECURITYGROUP]
    firewall_driver = quantum.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
 
-* 更新 /etc/quantum/metadata_agent.ini::
+更新 /etc/quantum/metadata_agent.ini ::
    
    # The Quantum user information for accessing the Quantum API.
    auth_url = http://10.10.10.51:35357/v2.0
@@ -645,7 +645,7 @@ Authors
 
    metadata_proxy_shared_secret = helloOpenStack
 
-* 更新 /etc/quantum/quantum.conf ::
+更新 /etc/quantum/quantum.conf ::
 
    rabbit_host = 10.10.10.51
 
@@ -660,20 +660,20 @@ Authors
    admin_password = service_pass
    signing_dir = /var/lib/quantum/keystone-signing
 
-* 更新 /etc/sudoers.d/quantum_sudoers  ::
+更新 /etc/sudoers.d/quantum_sudoers ::
 
    nano /etc/sudoers.d/quantum_sudoers
    
    #Modify the quantum user
    quantum ALL=NOPASSWD: ALL
 
-* 重启quantum服务::
+重启quantum服务 ::
 
    cd /etc/init.d/; for i in $( ls quantum-* ); do sudo service $i restart; done
 
 5.4. OpenVSwitch (第二部分)
 ------------------
-* 更新 /etc/network/interfaces ::
+更新/etc/network/interfaces ::
 
    auto eth0
    iface eth0 inet manual
@@ -682,9 +682,9 @@ Authors
    down ip link set $IFACE promisc off
    down ifconfig $IFACE down
 
-原有eth0 配置变更为 br-ex
+   #原有eth0 配置变更为 br-ex
 
-* 添加eth0 到 br-ex并重启网络::
+添加eth0 到 br-ex并重启网络 ::
 
    ovs-vsctl add-port br-ex eth0;/etc/init.d/networking restart
 
@@ -694,7 +694,9 @@ Authors
 6.1. 网络配置
 ------------
 
-*添加eth1 和 eth2 网卡
+::
+
+   #添加eth1 和 eth2 网卡
 
    auto eth1
    iface eth1 inet static
@@ -709,16 +711,16 @@ Authors
 6.2 KVM
 ------------------
 
-* 安装cpu-checker::
+安装cpu-checker ::
 
    apt-get install -y cpu-checker
    kvm-ok
 
-* 安装KVM::
+安装KVM ::
 
    apt-get install -y kvm libvirt-bin pm-utils
 
-* 更新  /etc/libvirt/qemu.conf ::
+更新/etc/libvirt/qemu.conf ::
 
    cgroup_device_acl = [
    "/dev/null", "/dev/full", "/dev/zero",
@@ -727,48 +729,48 @@ Authors
    "/dev/rtc", "/dev/hpet","/dev/net/tun"
    ]
 
-* 关闭KVM default virtual bridge ::
+关闭KVM default virtual bridge ::
 
    virsh net-destroy default
    virsh net-undefine default
 
-* 更新 /etc/libvirt/libvirtd.conf::
+更新/etc/libvirt/libvirtd.conf ::
 
    listen_tls = 0
    listen_tcp = 1
    auth_tcp = "none"
 
-* 更新 /etc/init/libvirt-bin.conf ::
+更新/etc/init/libvirt-bin.conf ::
 
    env libvirtd_opts="-d -l"
 
-* 更新 /etc/default/libvirt-bin  ::
+更新/etc/default/libvirt-bin  ::
 
    libvirtd_opts="-d -l"
 
-* 重启dbus 和 libvirt-bin服务::
+重启dbus 和 libvirt-bin服务 ::
 
     service dbus restart && service libvirt-bin restart
 
 6.3. OpenVSwitch
 ------------------
 
-* 安装 openVSwitch::
+安装 openVSwitch ::
 
    apt-get install -y openvswitch-switch openvswitch-datapath-dkms
 
-* 创建bridges::
+创建bridges ::
 
    ovs-vsctl add-br br-int
 
 6.4. Quantum
 ------------------
 
-* 安装 Quantum openvswitch agent::
+安装 Quantum openvswitch agent ::
 
    apt-get -y install quantum-plugin-openvswitch-agent
 
-* 更新 /etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini :: 
+更新/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini ::
 
    #Under the database section
    [DATABASE]
@@ -787,7 +789,7 @@ Authors
    [SECURITYGROUP]
    firewall_driver = quantum.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
 
-* 更新/etc/quantum/quantum.conf::
+更新/etc/quantum/quantum.conf ::
    
    rabbit_host = 10.10.10.51
 
@@ -802,18 +804,18 @@ Authors
    admin_password = service_pass
    signing_dir = /var/lib/quantum/keystone-signing
 
-* 重启服务::
+重启服务 ::
 
    service quantum-plugin-openvswitch-agent restart
 
 6.5. Nova
 ------------------
 
-* 安装Nova::
+安装Nova ::
 
    apt-get install -y nova-compute-kvm
 
-* 更新 /etc/nova/api-paste.ini ::
+更新/etc/nova/api-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
@@ -827,7 +829,7 @@ Authors
    # Workaround for https://bugs.launchpad.net/nova/+bug/1154809
    auth_version = v2.0
 
-* 更新/etc/nova/nova-compute.conf  ::
+更新/etc/nova/nova-compute.conf ::
    
    [DEFAULT]
    libvirt_type=kvm
@@ -836,7 +838,7 @@ Authors
    libvirt_vif_driver=nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver
    libvirt_use_virtio_for_bridges=True
 
-* 更新 /etc/nova/nova.conf ::
+更新/etc/nova/nova.conf ::
 
    [DEFAULT] 
    logdir=/var/log/nova
@@ -893,11 +895,11 @@ Authors
    osapi_volume_listen_port=5900
    cinder_catalog_info=volume:cinder:internalURL
 
-* 重启 nova-* 服务::
+重启 nova-* 服务 ::
 
    cd /etc/init.d/; for i in $( ls nova-* ); do sudo service $i restart; done   
 
-* 确认nova服务状态::
+确认nova服务状态 ::
 
    nova-manage service list
 
