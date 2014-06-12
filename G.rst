@@ -29,7 +29,7 @@ Authors
 
 * 安装前拔出网线！
 
-* 安装选择::
+* 安装选择 ::
 
    Language --> English --> Install Ubuntu Server
    Select a language --> English
@@ -49,7 +49,7 @@ Authors
 
 3.1配置网络
 -----------------
-::
+ ::
    sudo -s
    vi /etc/network/interfaces
 
