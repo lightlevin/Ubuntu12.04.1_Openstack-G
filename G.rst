@@ -25,7 +25,8 @@ Authors
 2.系统安装
 ======================
 
-* 安装 ubuntu 12.04.1 Server 64bit 系统
+2.1安装 ubuntu 12.04.1 Server 64bit 系统
+----------------------------------------
 
 * 安装前拔出网线！
 
@@ -42,6 +43,7 @@ Authors
    Configuring tasksel --> No automatic updates  
    Software selection --> OpenSSH server Install the GRUB boot loader on a hard disk --> Yes
    Finish the installation --> Continue
+
 * 插上网线！
 
 3.共有部分安装
@@ -49,7 +51,7 @@ Authors
 
 3.1配置网络
 -----------------
- ::
+::
    sudo -s
    vi /etc/network/interfaces
 
@@ -64,10 +66,11 @@ Authors
 
 3.2更新apt-get源列表
 -----------------------
-   
+
+::   
    apt-get update -y
 
-*添加Grizzy 仓库源
+* 添加Grizzy 仓库源 ::
 
    apt-get install -y ubuntu-cloud-keyring 
    echo deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main >> /etc/apt/sources.list.d/grizzly.list
@@ -120,7 +123,7 @@ dpkg -i linux-headers-3.2.54-030254-generic_3.2.54-030254.201401030035_amd64.deb
 reboot
 
 
-4. 控制节点安装
+4. 控制节点
 ===============
 
 
