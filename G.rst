@@ -28,9 +28,9 @@ Authors
 2.1安装 ubuntu 12.04.1 Server 64bit 系统
 ----------------------------------------
 
- **安装前拔出网线！** 
+**安装前拔出网线！** 
 
-  安装选择 ::
+安装选择 ::
 
    Language --> English --> Install Ubuntu Server
    Select a language --> English
@@ -44,7 +44,7 @@ Authors
    Software selection --> OpenSSH server Install the GRUB boot loader on a hard disk --> Yes
    Finish the installation --> Continue
 
- **插上网线！**
+**插上网线！**
 
 3.共有部分安装
 =============================
@@ -57,7 +57,7 @@ Authors
    sudo -s
    vi /etc/network/interfaces
 
- 更新内容 ::
+更新内容 ::
 
    auto eth0
    iface eth0 inet static
@@ -66,7 +66,7 @@ Authors
    gateway 10.xxx.xxx.xxx
    dns-nameservers 8.8.8.8
 
- 重启服务 ::
+重启服务 ::
 
    /etc/init.d/networking restart
 
@@ -77,7 +77,7 @@ Authors
 
    apt-get update -y
 
- 添加Grizzy 仓库源 ::
+添加Grizzy 仓库源 ::
 
    apt-get install -y ubuntu-cloud-keyring 
    echo deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main >> /etc/apt/sources.list.d/grizzly.list
@@ -90,19 +90,19 @@ Authors
 
    apt-get install -y ntp
 
- 禁用原有ntp池 ::
+禁用原有ntp池 ::
 
    sed -i 's/server 0.ubuntu.pool.ntp.org/#server 0.ubuntu.pool.ntp.org/g' /etc/ntp.conf
    sed -i 's/server 1.ubuntu.pool.ntp.org/#server 1.ubuntu.pool.ntp.org/g' /etc/ntp.conf
    sed -i 's/server 2.ubuntu.pool.ntp.org/#server 2.ubuntu.pool.ntp.org/g' /etc/ntp.conf
    sed -i 's/server 3.ubuntu.pool.ntp.org/#server 3.ubuntu.pool.ntp.org/g' /etc/ntp.conf
 
- 控制节点 ::
+控制节点 ::
 
    sed -i 's/server ntp.ubuntu.com/server 132.xxx.xxx.18/g' /etc/ntp.conf
    service ntp restart  
 
- 网络及计算节点 ::
+网络及计算节点 ::
 
    sed -i 's/server ntp.ubuntu.com/server 10.10.10.51/g' /etc/ntp.conf
    service ntp restart  
@@ -114,7 +114,7 @@ Authors
 
    apt-get install -y vlan bridge-utils
 
- 配置IP映射 ::
+配置IP映射 ::
 
    sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
 
@@ -131,13 +131,13 @@ Authors
    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.2.54-precise/linux-headers-3.2.54-030254_3.2.54-030254.201401030035_all.deb
    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.2.54-precise/linux-headers-3.2.54-030254-generic_3.2.54-030254.201401030035_amd64.deb
 
- 安装 ::
+安装 ::
    
    dpkg -i linux-image-3.2.54-030254-generic_3.2.54-030254.201401030035_amd64.deb
    dpkg -i linux-headers-3.2.54-030254_3.2.54-030254.201401030035_all.deb
    dpkg -i linux-headers-3.2.54-030254-generic_3.2.54-030254.201401030035_amd64.deb
 
- 重启 ::
+重启 ::
 
    reboot
 
@@ -149,27 +149,27 @@ Authors
 4.1. 网络配置
 ------------
 
- 添加eth1网卡配置 ::
+添加eth1网卡配置 ::
 
    auto eth1
    iface eth1 inet static
    address 10.10.10.51
    netmask 255.255.255.0
 
- 重启网络服务 ::
+重启网络服务 ::
 
    /etc/init.d/networking restart
 
 4.2. MySQL & RabbitMQ
 ------------
 
- 安装 MySQL ::
+安装 MySQL ::
 
    apt-get install -y mysql-server python-mysqldb
 
    #将CRT设置成UTF-8字符，以便于输入密码
 
- 配置mysql ::
+配置mysql ::
 
    sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
    service mysql restart
@@ -177,11 +177,11 @@ Authors
 4.3. RabbitMQ
 -------------------
 
- 安装 RabbitMQ ::
+安装 RabbitMQ ::
 
    apt-get install -y rabbitmq-server 
 
- 创建数据库 ::
+创建数据库 ::
 
    mysql -u root -p
    
@@ -211,37 +211,37 @@ Authors
 4.4. Keystone
 -------------------
 
- 安装 keystone ::
+安装 keystone ::
 
    apt-get install -y keystone
 
- 更新/etc/keystone/keystone.conf ::
+更新/etc/keystone/keystone.conf ::
 
    connection = mysql://keystoneUser:keystonePass@10.10.10.51/keystone
 
- 重启keystone服务 ::
+重启keystone服务 ::
 
    service keystone restart
    keystone-manage db_sync
 
- 下载数据库创建脚本 ::
+下载数据库创建脚本 ::
 
    #下载后修改脚本中的对应IP地址
    
    wget https://raw.github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/OVS_MultiNode/KeystoneScripts/keystone_basic.sh
    wget https://raw.github.com/mseknibilel/OpenStack-Grizzly-Install-Guide/OVS_MultiNode/KeystoneScripts/keystone_endpoints_basic.sh
 
- 文件授权 ::
+文件授权 ::
 
    chmod +x keystone_basic.sh
    chmod +x keystone_endpoints_basic.sh
 
- 执行 ::
+执行 ::
 
    ./keystone_basic.sh
    ./keystone_endpoints_basic.sh
 
- 创建环境变量文件 ::
+创建环境变量文件 ::
 
    vi creds
 
@@ -250,22 +250,22 @@ Authors
    export OS_PASSWORD=admin_pass
    export OS_AUTH_URL="http://10.xxx.xxx.165:5000/v2.0/"
 
- # 应用变量 ::
+应用变量 ::
 
    source creds
 
- 查看用户列表，如正常继续后面操作 ::
+查看用户列表，如正常继续后面操作 ::
 
    keystone user-list
 
 4.5. Glance
 -------------------
 
- 安装Glance ::
+安装Glance ::
 
    apt-get install -y glance
 
- 更新 /etc/glance/glance-api-paste.ini ::
+更新/etc/glance/glance-api-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
@@ -277,7 +277,7 @@ Authors
    admin_user = glance
    admin_password = service_pass
 
- 更新 /etc/glance/glance-registry-paste.ini ::
+更新/etc/glance/glance-registry-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
@@ -288,48 +288,48 @@ Authors
    admin_user = glance
    admin_password = service_pass
 
- 更新 /etc/glance/glance-api.conf ::
+更新/etc/glance/glance-api.conf ::
 
    sql_connection = mysql://glanceUser:glancePass@10.10.10.51/glance
 
- 和 ::
+和 ::
 
    [paste_deploy]
    flavor = keystone
    
- 更新 /etc/glance/glance-registry.conf ::
+更新/etc/glance/glance-registry.conf ::
 
    sql_connection = mysql://glanceUser:glancePass@10.10.10.51/glance
 
- 和 ::
+和 ::
 
    [paste_deploy]
    flavor = keystone
 
- 重启相应服务 ::
+重启相应服务 ::
 
    service glance-api restart; service glance-registry restart
 
- 同步Glance数据库 ::
+同步Glance数据库 ::
 
    glance-manage db_sync
 
- 创建基础镜像文件 ::
+创建基础镜像文件 ::
 
    glance image-create --name myFirstImage --is-public true --container-format bare --disk-format qcow2 --location http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-disk.img
 
- 查看创建状态 ::
+查看创建状态 ::
 
    glance image-list
 
 4.6. Quantum
 -------------------
 
- 安装Quantum ::
+安装Quantum ::
 
    apt-get install -y quantum-server
 
- 更新 /etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini ::
+更新/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini ::
 
    #Under the database section
    [DATABASE]
@@ -345,7 +345,7 @@ Authors
    [SECURITYGROUP]
    firewall_driver = quantum.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
 
- 更新/etc/quantum/api-paste.ini ::
+更新/etc/quantum/api-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
@@ -356,7 +356,7 @@ Authors
    admin_user = quantum
    admin_password = service_pass
 
- 更新 /etc/quantum/quantum.conf ::
+更新/etc/quantum/quantum.conf ::
 
    [keystone_authtoken]
    auth_host = 10.10.10.51
@@ -367,18 +367,18 @@ Authors
    admin_password = service_pass
    signing_dir = /var/lib/quantum/keystone-signing
 
- 重启quantum-server服务 ::
+重启quantum-server服务 ::
 
    service quantum-server restart
 
 4.7. Nova
 ------------------
 
- 安装Nova ::
+安装Nova ::
 
    apt-get install -y nova-api nova-cert novnc nova-consoleauth nova-scheduler nova-novncproxy nova-doc nova-conductor
 
- 更新 /etc/nova/api-paste.ini ::
+更新/etc/nova/api-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
@@ -392,7 +392,7 @@ Authors
    # Workaround for https://bugs.launchpad.net/nova/+bug/1154809
    auth_version = v2.0
 
-* 更新 /etc/nova/nova.conf ::
+更新/etc/nova/nova.conf ::
 
    [DEFAULT] 
    logdir=/var/log/nova
@@ -448,35 +448,35 @@ Authors
    volume_api_class=nova.volume.cinder.API
    osapi_volume_listen_port=5900
 
- 同步nova数据库 ::
+同步nova数据库 ::
 
    nova-manage db sync
 
- 重启所有 nova-* 服务 ::
+重启所有 nova-* 服务 ::
 
    cd /etc/init.d/; for i in $( ls nova-* ); do sudo service $i restart; done   
 
- 确认服务状态 ::
+确认服务状态 ::
 
    nova-manage service list
 
 4.8. Cinder
 --------------
 
- 安装Cinder ::
+安装Cinder ::
 
    apt-get install -y cinder-api cinder-scheduler cinder-volume iscsitarget open-iscsi iscsitarget-dkms
 
- 配置iscsi服务 ::
+配置iscsi服务 ::
 
    sed -i 's/false/true/g' /etc/default/iscsitarget
 
- 启动相关服务 ::
+启动相关服务 ::
    
    service iscsitarget start
    service open-iscsi start
 
- 更新/etc/cinder/api-paste.ini ::
+更新/etc/cinder/api-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
@@ -491,7 +491,7 @@ Authors
    admin_password = service_pass
    signing_dir = /var/lib/cinder
 
- 更新/etc/cinder/cinder.conf ::
+更新/etc/cinder/cinder.conf ::
 
    [DEFAULT]
    rootwrap_config=/etc/cinder/rootwrap.conf
@@ -504,11 +504,11 @@ Authors
    auth_strategy = keystone
    iscsi_ip_address=10.10.10.51
 
- 同步Cinder数据库 ::
+同步Cinder数据库 ::
 
    cinder-manage db sync
 
- 创建cinder-volumes ::
+创建cinder-volumes ::
 
    dd if=/dev/zero of=cinder-volumes bs=1 count=0 seek=2G
    losetup /dev/loop2 cinder-volumes
@@ -523,33 +523,33 @@ Authors
    8e
    w
 
- 创建pv及vg ::
+创建pv及vg ::
 
    pvcreate /dev/loop2
    vgcreate cinder-volumes /dev/loop2
 
    #删除/etc/init.d/ 产生cinder-volumes文件
 
- 重启 cinder 服务 ::
+重启 cinder 服务 ::
 
    cd /etc/init.d/; for i in $( ls cinder-* ); do sudo service $i restart; done
 
- 查看 cinder 服务状态 ::
+查看 cinder 服务状态 ::
 
    cd /etc/init.d/; for i in $( ls cinder-* ); do sudo service $i status; done
 
 4.9. Horizon
 --------------
 
- 安装horizon ::
+安装horizon ::
 
    apt-get install -y openstack-dashboard memcached
 
- 如果你不喜欢ubuntu-theme风格，可以一下命令关闭 ::
+如果你不喜欢ubuntu-theme风格，可以一下命令关闭 ::
 
    dpkg --purge openstack-dashboard-ubuntu-theme 
 
- 重启 Apache 和 memcached ::
+重启 Apache 和 memcached ::
 
    service apache2 restart; service memcached restart
 
@@ -562,9 +562,11 @@ Authors
 5.1.网络配置
 ------------
 
-vi /etc/network/interfaces
+::
 
-*添加eth1和eth2
+   vi /etc/network/interfaces
+
+   #添加eth1和eth2
 
    auto eth1
    iface eth1 inet static
@@ -580,11 +582,11 @@ vi /etc/network/interfaces
 5.2. OpenVSwitch (第一部分)
 ------------------
 
-* 安装openVSwitch::
+安装openVSwitch ::
 
    apt-get install -y openvswitch-switch openvswitch-datapath-dkms
 
-* 创建 bridges::
+创建 bridges ::
 
    ovs-vsctl add-br br-int
    ovs-vsctl add-br br-ex
@@ -592,11 +594,11 @@ vi /etc/network/interfaces
 5.3. Quantum
 ------------------
 
-* 安装Quantum openvswitch agent, l3 agent 和 dhcp agent::
+安装Quantum openvswitch agent, l3 agent 和 dhcp agent ::
 
    apt-get -y install quantum-plugin-openvswitch-agent quantum-dhcp-agent quantum-l3-agent quantum-metadata-agent
 
-* 更新 /etc/quantum/api-paste.ini::
+更新/etc/quantum/api-paste.ini ::
 
    [filter:authtoken]
    paste.filter_factory = keystoneclient.middleware.auth_token:filter_factory
