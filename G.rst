@@ -30,7 +30,7 @@ Authors
 
 * 安装前拔出网线！
 
-* 安装选择 ::
+* 安装选择::
 
    Language --> English --> Install Ubuntu Server
    Select a language --> English
@@ -51,10 +51,13 @@ Authors
 
 3.1配置网络
 -----------------
+
 ::
 
    sudo -s
    vi /etc/network/interfaces
+
+更新内容 ::
 
    auto eth0
    iface eth0 inet static
@@ -62,6 +65,8 @@ Authors
    netmask 255.xxx.xxx.xxx
    gateway 10.xxx.xxx.xxx
    dns-nameservers 8.8.8.8
+
+重启服务 ::
 
    /etc/init.d/networking restart
 
