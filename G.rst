@@ -28,9 +28,9 @@ Authors
 2.1安装 ubuntu 12.04.1 Server 64bit 系统
 ----------------------------------------
 
-* 安装前拔出网线！
+** 安装前拔出网线！**
 
-* 安装选择::
+* 安装选择 ::
 
    Language --> English --> Install Ubuntu Server
    Select a language --> English
@@ -73,10 +73,11 @@ Authors
 3.2更新apt-get源列表
 -----------------------
 
-::   
+::
+
    apt-get update -y
 
-* 添加Grizzy 仓库源 ::
+添加Grizzy 仓库源 ::
 
    apt-get install -y ubuntu-cloud-keyring 
    echo deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main >> /etc/apt/sources.list.d/grizzly.list
